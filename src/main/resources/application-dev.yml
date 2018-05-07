@@ -1,0 +1,36 @@
+server:
+  address:
+  port: 8380
+  error:
+    path: /error
+  tomcat:
+    uri-encoding: UTF-8
+#    basedir: /usr/local/logs/myapp
+
+
+
+
+
+logging:
+  config: classpath:log4j2.xml
+#  path: /usr/local/logs/myapp
+
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/myapp
+    username: root
+    password: password.
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: cn.nawa.restful.bean
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
