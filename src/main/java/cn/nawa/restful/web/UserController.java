@@ -18,8 +18,6 @@ import java.util.*;
 
 /**
  * @author nawa
- * @ClassName cn.saytime.web.UserController
- * @Description
  */
 @RestController
 @RequestMapping("v1/user")
@@ -32,10 +30,10 @@ public class UserController {
 
     /**
      * 根据ID查询用户
-     * @param id
+     * @param id 用户ID
      * @return
      */
-    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
+    @ApiOperation(value="获取用户详细信息", notes="获取指定ID的用户信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ResponseEntity<JsonResult> getUserById (@PathVariable(value = "id") Long id){
@@ -59,7 +57,7 @@ public class UserController {
 
     /**
      * 查询用户列表
-     * @return
+     * @return 所有用户列表
      */
     @ApiOperation(value="获取用户列表", notes="获取用户列表")
     @ApiImplicitParams({
@@ -85,19 +83,16 @@ public class UserController {
 
     /**
      * 添加用户
-     * @param user
-     * @return
+     * @param user 需要添加的用户对象
+     * @return 新添加的用户信息
      */
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
+    @ApiImplicitParam(name = "user", value = "用户信息实体", required = true, dataType = "User")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<JsonResult> add (@RequestBody User user){
         JsonResult r = new JsonResult();
         logger.info("add, user:" + user);
         try {
-            user.setCreatetime(null);
-            user.setUpdatetime(null);
-            user.setId(null);
             userService.addUser(user);
             user = userService.selectById(user.getId());
             r.setResult(user);
@@ -113,10 +108,10 @@ public class UserController {
 
     /**
      * 根据id删除用户
-     * @param id
-     * @return
+     * @param id 需要删除的用户ID
+     * @return 删除用户ID
      */
-    @ApiOperation(value="删除用户", notes="根据url的id来指定删除用户")
+    @ApiOperation(value="删除用户", notes="删除指定ID的用户")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @RequestMapping(value = "/del/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<JsonResult> delete (@PathVariable(value = "id") Long id){
@@ -137,10 +132,10 @@ public class UserController {
 
     /**
      * 根据id修改用户信息
-     * @param user
-     * @return
+     * @param user 需要修改的用户对象
+     * @return 修改后的用户对象
      */
-    @ApiOperation(value="更新信息", notes="根据url的id来指定更新用户信息")
+    @ApiOperation(value="更新信息", notes="更新指定ID的用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long",paramType = "path"),
             @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "User")
@@ -153,7 +148,6 @@ public class UserController {
             User u = userService.selectById(id.intValue());
             u.setName(user.getName());
             u.setComment(user.getComment());
-            u.setUpdatetime(null);
             userService.updateUser(u);
             u = userService.selectById(u.getId());
             r.setResult(u);
@@ -168,16 +162,8 @@ public class UserController {
     }
 
     @ApiIgnore//使用该注解忽略这个API
-    @RequestMapping(value = "/termsOfService", method = RequestMethod.GET)
-    public String termsOfService() {
-        return "This is a private Restful service, If you want to use it, please contact Nawa.";
-    }
-
-    @ApiIgnore//使用该注解忽略这个API
     @RequestMapping(value = "/hi", method = RequestMethod.GET)
     public String  jsonTest() {
         return " hi guy!";
     }
-
-
 }

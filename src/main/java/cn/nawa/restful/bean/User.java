@@ -1,16 +1,22 @@
 package cn.nawa.restful.bean;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 public class User {
+
+    @ApiModelProperty(hidden = true)
     private Integer id;
 
     private String name;
 
     private String comment;
 
+    @ApiModelProperty(hidden = true)
     private Date createtime;
 
+    @ApiModelProperty(hidden = true)
     private Date updatetime;
 
     public Integer getId() {
