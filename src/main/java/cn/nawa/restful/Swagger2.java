@@ -25,7 +25,7 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("RESTful API for Jeremy's Love App")
-                .description("This document is the API specification for Jeremy's Love App. btw, Jeremy is a GuaPi~, 'GuaPi' means highly intelligent!")
+                .description("This document is the API specification for Jeremy's Love App. btw, Jeremy is a GuaPi~,'GuaPi' means highly intelligent!")
                 .termsOfServiceUrl("http://www.apache.org/licenses/LICENSE-2.0")
                 .version("1.0")
                 .contact(new Contact("Nawa", null, "isven0_0@sina.com"))
