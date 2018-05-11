@@ -6,7 +6,7 @@
 	<groupId>cn.nawa</groupId>
 	<artifactId>restful</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>restful</name>
 	<description>My Project for Spring Boot And Restful</description>
